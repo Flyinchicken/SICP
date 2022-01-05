@@ -1,0 +1,44 @@
+This book is mainly about abstractions used in computer science.
+Chapter 1 introduces building abstraction with Procedures (similar to functions).
+
+The dialect Scheme of Lisp is used in the book. Lisp is the second oldest programming language (Fortran is ealier) and it was designed for
+AI applications.
+
+Primitive expressions (building blocks)
+Combination (allows us to build)
+Abstraction (allows us to build larger and more complex structure)
+
+Scheme interpreter: read-eval-print loop
+
+(operator operand1 operand2 ...) This prefix format allows arbitrary number of arguments.
+
+Expressions can be nested within other expressions. (more complexity)
+
+Naming allows us to abstract away values and procedures.
+(define ((procedure_name) arguments)   (body))
+
+The substitution model for procedure application.
+1. The normal order: fully expand and then evaluate (like a tree and tree accumulation)
+2. The applicative order: evaluate when needed and then bring evaluated values together (actual way Scheme Interpreter works)
+
+
+Control Flow:
+
+(cond ((predicate1) (action1))
+      ((predicate2) (action2))
+)
+
+
+(if (predicate) (action) (else-action))
+
+Exercise 1.8:
+Newton's method for cube roots
+
+(define (abs x) (cond ((< x 0) (- x))
+                      (else x)))
+(define (square x) (* x x))
+(define (nochange new old) (< (/ (abs (- new old)) old) 0.000001))
+(define (refine new x) (/ (+ (/ x (square new)) (* 2 new)) 3))
+(define (cube-iter guess x) (if (nochange (refine guess x) guess) guess (cube-iter (refine guess x) x) ))
+(define (cuberoot x) (cube-iter 1.0 x))
+(cuberoot 15)

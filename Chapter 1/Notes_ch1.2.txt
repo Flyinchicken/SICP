@@ -1,0 +1,65 @@
+So far we have learned the basic programming features.
+However, we are like cheese players who merely know how each piece moves but know nothing about typical openings and stractegies.
+Expert programmers know what moves are worthwhile and how the move will change the game.
+
+In this section, we will learn about the rate at which processes consume the important computational resources.
+
+Factorial:
+(define (factorial x) (if (= x 1) 1 (* x (factorial (- x 1)))))
+(factorial 5)
+
+This method computes the factorial by counting down.
+
+We can also use another method which starts with 1 and count up to n.
+
+
+
+A recursive procedure means that its definition refers to the procedure itself.
+
+Recursive process means that the process evolves by first expanding (defer operations) followed by evaluations to shrink the process.
+Iterative process does not expand and then shrink.
+
+Iterative processes can be implemented with recursive procedure and the space complexity is constant meaning that the computer needs to keep track of some parameters only and the parameters are always up to date.
+This feature is called tailed recursive and it is a key feature for Scheme.
+
+Other programming languages such as C can only implement iterative processes with constant space using Loops because any recursive calls will result in an increase in memory usage.
+
+
+
+Tree recursion and the Fibonacci Numbers
+Also two diff ways to implement the calculation
+1. Top down approach where we start with the target number and reduce it to a final stop point. Fib 0 and Fib 1. (recursive procedure and recursive process -- expands and then shrinks)  This is terrible because we have lots of repetitive calls and the number of steps grows exponentially with x.
+
+2. Bottom up approch: start with 0 and 1 and increase until we reach the target x.
+(define (fib x) 
+    (define (fib-iter a b c x)
+      (if (= c x) b 
+          (fib-iter (+ a b) a (+ c 1) x)
+          )
+      )
+  (fib-iter 1 0 0 x)
+          )
+(fib 5)
+
+
+In a tree structure, the number of steps required is proportional to the number of nodes and the space required is proportional to the depth of the tree.
+
+Exercise 1.11
+(define (f x)
+  (define (update a b c)
+    (cond ((= x 0) 0)
+          ((= x 1) 1)
+          ((= x 2) 2)
+          (else 
+           (if (= x (+ c 1)) (+ (* 3 a) (* 2 b) c)
+               (update (+ a 1) (+ b 1) (+ c 1))
+               )
+           )
+          )
+    )
+  (update 0 1 2)
+  )
+(f 10)
+
+I found this kind of exercise pretty hard because I have trouble transforming from a recursive process (simpler and closer to the definition) mindset to iterative process mindset. However, after solving this problem, I think the key to write iterative processes is to setup enough variables for the program to check so that we don't have to expand the process as it evolves.
+

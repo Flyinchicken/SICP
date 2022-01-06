@@ -42,3 +42,11 @@ Newton's method for cube roots
 (define (cube-iter guess x) (if (nochange (refine guess x) guess) guess (cube-iter (refine guess x) x) ))
 (define (cuberoot x) (cube-iter 1.0 x))
 (cuberoot 15)
+
+Some key ideas from the previous example:
+1. Big problems can be broken down into subproblems and we can use many subprocedures to solve them one by one
+2. Procedure is like a black box, we only concern about the result of the procedure and not the implementation (as oppose to data stracture and algorithms where we look at different procedures that can do the same job and compare their performance)
+3. defining subprocedures as global names can cause problem since the user of the procedure will not know the name of the subprocedures involved in the procedure and they might accidetally rename the subprocedures causing conflicts.
+4. better idea is to define subprocedures within the procedure so that we confine those variable names (This technique is known as the Block Strcture)
+5. Lexical scope means that we can have a free variable bound within the procedure freely used by any subprocedures
+
